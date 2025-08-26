@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
 //read dish by id
 router.get("/:id", async (req, res) => {
     try {
-        const dish = await Post.findById(req.params.id);
+        const dish = await Menu.findById(req.params.id);
         if (!dish) {
             return res.status(404).json({ message: "Dish not found" });
         }
@@ -50,7 +50,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-//update post by id
+//update dish by id
 router.put("/:id", authenticateToken, async (req, res) => {
     try {
         const updatedDish = await Menu.findByIdAndUpdate(
