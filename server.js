@@ -8,6 +8,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
 const menuRoutes = require("./routes/menuRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors());
 //routes
 app.use("/api", authRoutes);
 app.use("/api/menu", menuRoutes);
+app.use("/api/messages", messageRoutes);
 
 //start application
 app.listen(port, () => {
