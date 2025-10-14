@@ -18,7 +18,7 @@ const menuSchema = new mongoose.Schema({
     },
     ingredients: {
         type: String,
-        required: [true, "Fyll i ingredienser"], 
+        required: false,
     },
     price: {
         type: Number,
