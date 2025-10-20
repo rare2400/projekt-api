@@ -75,8 +75,8 @@ npm install
 3. **Skapa `.env`-fil och fyll i databasuppgifter:**
 ```env
 PORT=3000
-DATABASE= "--hämtad från MongoDB Atlas--"
-JWT-SECRET-KEY="--skapa hemlig JWT-nyckel"
+DATABASE= "--länk hämtad från MongoDB Atlas--"
+JWT-SECRET-KEY="--skapa hemlig JWT-nyckel--"
 ```
 
 4. **Starta server:**
