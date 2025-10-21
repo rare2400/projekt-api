@@ -6,7 +6,6 @@
 const express = require("express");
 const router = express.Router();
 const authenticateToken = require("../middleware/authenticateToken");
-require("dotenv").config();
 
 const Message = require("../models/messages");
 
