@@ -6,21 +6,11 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const authenticateToken = require("../middleware/authenticateToken");
 
 //import User model
 const User = require("../models/admin");
-
-
-//connect to database
-mongoose.set("strictQuery", false);
-mongoose.connect(process.env.DATABASE).then(() => {
-    console.log("Connected to MongoDB");
-}).catch((err) => {
-    console.error("Error connecting to MongoDB", err)
-});
 
 
 //router to get all users

@@ -3,18 +3,30 @@
  * Skapad av: Ramona Reinholdz, rare2400
  */
 
+//import modules
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 require("dotenv").config();
 
+/* initiate express, bodyparser and cors
+ * get port from .env-file */
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cors());
+
+//connect to database
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.DATABASE).then(() => {
+    console.log("Connected to MongoDB");
+}).catch((err) => {
+    console.error("Error connecting to MongoDB", err)
+});
 
 //routes
 app.use("/api", authRoutes);
