@@ -20,9 +20,11 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-//hash password
+//hash password when saving user
 userSchema.pre("save", async function (next) {
     try {
+
+        //hashing password if it is new and saving the hashed version
         if (this.isNew || this.isModified("password")) {
             const hashedPassword = await bcrypt.hash(this.password, 10);
             this.password = hashedPassword;
@@ -38,6 +40,7 @@ userSchema.pre("save", async function (next) {
 //register user
 userSchema.statics.register = async function (username, password) {
     try {
+        //create user-object and save the user
         const user = new this({ username, password });
         await user.save();
         return user;
@@ -46,7 +49,7 @@ userSchema.statics.register = async function (username, password) {
     }
 };
 
-//compare hashed passwords
+//compare saved hashed password with the entered password when user sign in
 userSchema.methods.comparePassword = async function (password) {
     try {
         return await bcrypt.compare(password, this.password);
@@ -59,11 +62,12 @@ userSchema.methods.comparePassword = async function (password) {
 userSchema.statics.login = async function (username, password) {
     try {
         const user = await this.findOne({ username });
-        // If the user does not exist, throw an error
+        //if the user does not exist, throw an error
         if (!user) {
             throw new Error("incorrect username or password");
         }
 
+        //compare entered password with the hashed on
         const isPasswordMatch = await user.comparePassword(password);
 
         //if the password does not match, throw an error
